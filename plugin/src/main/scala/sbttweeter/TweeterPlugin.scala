@@ -27,10 +27,10 @@ object TweeterPlugin extends AutoPlugin {
   override def projectSettings = Seq(
     // Required settings that must be defined by the project utilizing the plugin
     tweeterConsumerKey := {
-      ???
+      sys.error("The application consumer key is not defined. Please declare a value for the `tweeterConsumerKey` key.")
     },
     tweeterConsumerSecret := {
-      ???
+      sys.error("The application consumer secret is not defined. Please declare a value for the `tweeterConsumerSecret` key.")
     },
     tweeterAccessToken := {
       ???
