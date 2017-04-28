@@ -22,7 +22,26 @@ object TweeterPlugin extends AutoPlugin {
     val tweeterTweet              = TweeterKeys.tweeterTweet
   }
 
+  import autoImport._
+
   override def projectSettings = Seq(
-    /* Whatever settings/behavior you want to make available to the project that includes your plugin */
+    // Required settings that must be defined by the project utilizing the plugin
+    tweeterConsumerKey := {
+      ???
+    },
+    tweeterConsumerSecret := {
+      ???
+    },
+    tweeterAccessToken := {
+      ???
+    },
+    tweeterAccessTokenSecret := {
+      ???
+    },
+
+    // The one input task that will be available to our plugin users, by default
+    tweeterTweet := {
+      ???
+    }
   )
 }
