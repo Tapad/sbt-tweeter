@@ -12,6 +12,7 @@ object TweeterKeys {
   val tweeterAccessToken        = settingKey[String]("The Twitter user access token")
   val tweeterAccessTokenSecret  = settingKey[String]("The Twitter user access token secret")
   val tweeterTweet              = inputKey[Long]("Post a tweet to the configured Twitter account")
+  val tweeterCannedTweet        = taskKey[Long]("Post a canned tweet to the configured Twitter account")
 }
 
 object TweeterPlugin extends AutoPlugin {
@@ -25,6 +26,7 @@ object TweeterPlugin extends AutoPlugin {
     val tweeterAccessToken        = TweeterKeys.tweeterAccessToken
     val tweeterAccessTokenSecret  = TweeterKeys.tweeterAccessTokenSecret
     val tweeterTweet              = TweeterKeys.tweeterTweet
+    val tweeterCannedTweet        = TweeterKeys.tweeterCannedTweet
   }
 
   import autoImport._
@@ -49,6 +51,11 @@ object TweeterPlugin extends AutoPlugin {
         case Success(tweetId) => log.info(s"""Successfully tweeted: "$tweet" ($tweetId)"""); tweetId
         case Failure(e) => sys.error("An error was encountered when trying to tweet: " + ErrorHandling.reducedToString(e))
       }
+    },
+
+    // Not really useful, but let's add an example of invoking our input task programmatically
+    tweeterCannedTweet := {
+      tweeterTweet.toTask(" Thanks for using sbt-tweeter!").value
     }
   )
 
