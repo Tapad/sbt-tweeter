@@ -4,7 +4,11 @@ import sbt._
 import sbt.Keys._
 
 object TweeterKeys {
-  /* Instantiate your setting, task, and input task keys here */
+  val tweeterConsumerKey        = settingKey[String]("The Twitter application consumer key")
+  val tweeterConsumerSecret     = settingKey[String]("The Twitter application consumer secret")
+  val tweeterAccessToken        = settingKey[String]("The Twitter user access token")
+  val tweeterAccessTokenSecret  = settingKey[String]("The Twitter user access token secret")
+  val tweeterTweet              = inputKey[Long]("Post a tweet to the configured Twitter account")
 }
 
 object TweeterPlugin extends AutoPlugin {
