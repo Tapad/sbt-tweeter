@@ -3,10 +3,14 @@ lazy val root = (project in file("."))
   .enablePlugins(CrossPerProjectPlugin)
 
 lazy val plugin = (project in file("plugin"))
+  .settings(scriptedSettings: _*)
   .settings(
     name := "sbt-tweeter",
     sbtPlugin := true,
-    scalaVersion := "2.10.6"
+    scalaVersion := "2.10.6",
+    scriptedLaunchOpts ++= Seq("-Dplugin.version=" + version.value),
+    scriptedBufferLog := false,
+    publishLocal := publishLocal.dependsOn(publishLocal in library).value
   )
   .dependsOn(library)
 
