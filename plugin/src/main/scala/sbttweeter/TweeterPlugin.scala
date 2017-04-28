@@ -26,22 +26,21 @@ object TweeterPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     // Required settings that must be defined by the project utilizing the plugin
-    tweeterConsumerKey := {
-      sys.error("The application consumer key is not defined. Please declare a value for the `tweeterConsumerKey` key.")
-    },
-    tweeterConsumerSecret := {
-      sys.error("The application consumer secret is not defined. Please declare a value for the `tweeterConsumerSecret` key.")
-    },
-    tweeterAccessToken := {
-      ???
-    },
-    tweeterAccessTokenSecret := {
-      ???
-    },
+    tweeterConsumerKey        := undefinedKeyError(tweeterConsumerKey.key),
+    tweeterConsumerSecret     := undefinedKeyError(tweeterConsumerSecret.key),
+    tweeterAccessToken        := undefinedKeyError(tweeterAccessToken.key),
+    tweeterAccessTokenSecret  := undefinedKeyError(tweeterAccessTokenSecret.key),
 
     // The one input task that will be available to our plugin users, by default
     tweeterTweet := {
       ???
     }
   )
+
+  def undefinedKeyError[A](key: AttributeKey[A]): A = {
+    sys.error(
+      s"${key.description.getOrElse("A required key")} is not defined. " +
+      s"Please declare a value for the `${key.label}` key."
+    )
+  }
 }
