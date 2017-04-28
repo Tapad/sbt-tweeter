@@ -13,6 +13,8 @@ object TweeterKeys {
 
 object TweeterPlugin extends AutoPlugin {
 
+  override def trigger = allRequirements
+
   object autoImport {
     val TweeterKeys               = sbttweeter.TweeterKeys
     val tweeterConsumerKey        = TweeterKeys.tweeterConsumerKey
