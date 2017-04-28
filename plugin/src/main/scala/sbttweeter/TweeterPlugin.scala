@@ -14,8 +14,12 @@ object TweeterKeys {
 object TweeterPlugin extends AutoPlugin {
 
   object autoImport {
-    /* Whatever you want brought into scope automatically for users of your plugin */
-    val TweeterKeys = sbttweeter.TweeterKeys
+    val TweeterKeys               = sbttweeter.TweeterKeys
+    val tweeterConsumerKey        = TweeterKeys.tweeterConsumerKey
+    val tweeterConsumerSecret     = TweeterKeys.tweeterConsumerSecret
+    val tweeterAccessToken        = TweeterKeys.tweeterAccessToken
+    val tweeterAccessTokenSecret  = TweeterKeys.tweeterAccessTokenSecret
+    val tweeterTweet              = TweeterKeys.tweeterTweet
   }
 
   override def projectSettings = Seq(
