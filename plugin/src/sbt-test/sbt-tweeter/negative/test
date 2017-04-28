@@ -1,1 +1,1 @@
-> eval println("Hello, World!")
+-> tweeterTweet "Hello, World!"
