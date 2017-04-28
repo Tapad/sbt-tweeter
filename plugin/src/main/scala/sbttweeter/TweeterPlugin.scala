@@ -38,6 +38,7 @@ object TweeterPlugin extends AutoPlugin {
 
     // The one input task that will be available to our plugin users, by default
     tweeterTweet := {
+      val log = streams.value.log
       val tweet = spaceDelimited("<text of tweet>").parsed.mkString(" ")
       val consumerKey = tweeterConsumerKey.value
       val consumerSecret = tweeterConsumerSecret.value
@@ -45,7 +46,7 @@ object TweeterPlugin extends AutoPlugin {
       val accessTokenSecret = tweeterAccessTokenSecret.value
       val client = TweeterService(consumerKey, consumerSecret, accessToken, accessTokenSecret)
       client.post(tweet) match {
-        case Success(tweetId) => tweetId
+        case Success(tweetId) => log.info(s"""Successfully tweeted: "$tweet" ($tweetId)"""); tweetId
         case Failure(e) => sys.error("An error was encountered when trying to tweet: " + ErrorHandling.reducedToString(e))
       }
     }
