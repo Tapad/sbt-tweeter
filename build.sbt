@@ -1,8 +1,12 @@
+import Publishing._
+
 lazy val root = (project in file("."))
+  .settings(ReleaseSettings: _*)
   .aggregate(plugin, library)
   .enablePlugins(CrossPerProjectPlugin)
 
 lazy val plugin = (project in file("plugin"))
+  .settings(PublishSettings: _*)
   .settings(scriptedSettings: _*)
   .settings(
     name := "sbt-tweeter",
@@ -15,6 +19,7 @@ lazy val plugin = (project in file("plugin"))
   .dependsOn(library)
 
 lazy val library = (project in file("library"))
+  .settings(PublishSettings: _*)
   .settings(
     name := "tweeter-core",
     scalaVersion := "2.10.6",
@@ -22,5 +27,6 @@ lazy val library = (project in file("library"))
     libraryDependencies ++= Seq(
       "org.twitter4j" % "twitter4j-core" % "4.0.0",
       "org.scalatest" %% "scalatest" % "3.0.0" % Test
-    )
+    ),
+    publishMavenStyle := true
   )
