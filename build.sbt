@@ -6,7 +6,7 @@ lazy val root = (project in file("."))
   .enablePlugins(CrossPerProjectPlugin)
 
 lazy val plugin = (project in file("plugin"))
-  .settings(PublishSettings: _*)
+  .settings(PluginPublishSettings: _*)
   .settings(scriptedSettings: _*)
   .settings(
     name := "sbt-tweeter",
@@ -19,7 +19,7 @@ lazy val plugin = (project in file("plugin"))
   .dependsOn(library)
 
 lazy val library = (project in file("library"))
-  .settings(PublishSettings: _*)
+  .settings(LibraryPublishSettings: _*)
   .settings(
     name := "tweeter-core",
     scalaVersion := "2.10.6",
