@@ -33,10 +33,18 @@ object TweeterPlugin extends AutoPlugin {
 
   override def projectSettings = Seq(
     // Required settings that must be defined by the project utilizing the plugin
-    tweeterConsumerKey        := undefinedKeyError(tweeterConsumerKey.key),
-    tweeterConsumerSecret     := undefinedKeyError(tweeterConsumerSecret.key),
-    tweeterAccessToken        := undefinedKeyError(tweeterAccessToken.key),
-    tweeterAccessTokenSecret  := undefinedKeyError(tweeterAccessTokenSecret.key),
+    tweeterConsumerKey := {
+      tweeterConsumerKey.??(undefinedKeyError(tweeterConsumerKey.key)).value
+    },
+    tweeterConsumerSecret := {
+      tweeterConsumerSecret.??(undefinedKeyError(tweeterConsumerSecret.key)).value
+    },
+    tweeterAccessToken := {
+      tweeterAccessToken.??(undefinedKeyError(tweeterAccessToken.key)).value
+    },
+    tweeterAccessTokenSecret := {
+      tweeterAccessTokenSecret.??(undefinedKeyError(tweeterAccessTokenSecret.key)).value
+    },
 
     // The one input task that will be available to our plugin users, by default
     tweeterTweet := {
